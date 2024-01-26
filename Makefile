@@ -4,7 +4,7 @@ clean:
 build:
 	@./gradlew clean build
 
-docs:
+doc:
 	@./gradlew myJavadocs
 
 test:

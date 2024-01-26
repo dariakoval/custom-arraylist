@@ -30,6 +30,7 @@ task myJavadocs(type: Javadoc) {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {
