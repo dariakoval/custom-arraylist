@@ -1,9 +1,7 @@
 # Custom implementation of ArrayList
-
 Resizable-array implementation of the ArrayList. \
 Each CustomArrayList instance has a capacity. The capacity is the size of the array used to store the elements in the list. As elements are added to an ArrayList, its capacity grows automatically. \
 Each CustomArrayList instance has the following operations:
-
 * *boolean* **add** *(T element)* - append the specified element to the end of this list
 * *boolean* **addAll** *(CustomArrayList<T> list)* - append all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's Iterator
 * *void* **insert** *(int index, T element)* - insert the specified element at the specified position in this list
@@ -22,26 +20,27 @@ var list = new CustomArrayList<String>();
 CustomArrayListUtil.sort(list);
 ```
 
-## Requirements
+## Tests and linter status
+[![Java CI](https://github.com/dariakoval/custom-arraylist/actions/workflows/generate.yml/badge.svg)](https://github.com/dariakoval/custom-arraylist/actions/workflows/generate.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2301f03a611edbc7d5f0/maintainability)](https://codeclimate.com/github/dariakoval/custom-arraylist/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/2301f03a611edbc7d5f0/test_coverage)](https://codeclimate.com/github/dariakoval/custom-arraylist/test_coverage)
 
+## Requirements
 * JDK 20
 * Gradle 8.3
 * GNU Make
 
 ## Build
-
 ```bash
 make build
 ```
 
 ## Test
-
 ```bash
 make test
 ```
 
 ## Report
-
 ```bash
 make report
 cd build/reports/tests/test
@@ -49,13 +48,11 @@ cd build/reports/tests/test
 ```
 
 ## Linter
-
 ```bash
 make lint
 ```
 
 ## Javadoc
-
 ```bash
 make doc
 ```
