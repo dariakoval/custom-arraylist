@@ -59,12 +59,28 @@ class CustomArrayListTest {
     @Test
     void testAdd() {
         assertThat(testStringList.add("One")).isTrue();
-        assertThat(testStringList.getSize()).isEqualTo(1);
-        assertThat(testStringList.toString()).isEqualTo("[One]");
+        assertThat(testStringList.add("Two")).isTrue();
+        assertThat(testStringList.add("Three")).isTrue();
+        assertThat(testStringList.add("Four")).isTrue();
+        assertThat(testStringList.add("Five")).isTrue();
+        assertThat(testStringList.add("Six")).isTrue();
+        assertThat(testStringList.add("Seven")).isTrue();
+        assertThat(testStringList.add("Eight")).isTrue();
+        assertThat(testStringList.getSize()).isEqualTo(8);
+        assertThat(testStringList.toString()).isEqualTo("[One, Two, Three, Four, Five, Six, Seven, Eight]");
 
+        testIntegerList.add(0);
         testIntegerList.add(1);
-        assertThat(testIntegerList.getSize()).isEqualTo(1);
-        assertThat(testIntegerList.toString()).isEqualTo("[1]");
+        testIntegerList.add(2);
+        testIntegerList.add(3);
+        testIntegerList.add(4);
+        testIntegerList.add(5);
+        testIntegerList.add(6);
+        testIntegerList.add(7);
+        testIntegerList.add(8);
+        testIntegerList.add(9);
+        assertThat(testIntegerList.getSize()).isEqualTo(10);
+        assertThat(testIntegerList.toString()).isEqualTo("[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]");
     }
 
     @Test
@@ -170,12 +186,14 @@ class CustomArrayListTest {
         assertThat(testStringList.getSize()).isEqualTo(2);
         testStringList.remove(0);
         assertThat(testStringList.toString()).doesNotContain("One");
+        assertThat(testStringList.getSize()).isEqualTo(1);
 
         testIntegerList.add(1);
         testIntegerList.add(2);
         assertThat(testIntegerList.getSize()).isEqualTo(2);
         testIntegerList.remove(0);
         assertThat(testIntegerList.toString()).doesNotContain("1");
+        assertThat(testIntegerList.getSize()).isEqualTo(1);
     }
 
     @Test
