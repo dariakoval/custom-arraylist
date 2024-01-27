@@ -43,7 +43,7 @@ make test
 ## Report
 ```bash
 make report
-cd build/reports/tests/test
+cd build/reports/jacoco/test/html
 # Open index.html in browser
 ```
 
