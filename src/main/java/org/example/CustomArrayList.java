@@ -123,8 +123,8 @@ public class CustomArrayList<T> {
 
         var element = (T) data[index];
         System.arraycopy(data, index + 1, data, index, size - index - 1);
+        data[size] = null;
         size--;
-        data[index] = null;
 
         return element;
 
@@ -138,12 +138,7 @@ public class CustomArrayList<T> {
      */
     public boolean remove(T removedElement) {
         for (int i = 0; i < size; i++) {
-            if (removedElement == null && data[i] == null) {
-                remove(i);
-                return true;
-            }
-
-            if (removedElement != null && removedElement.equals(data[i])) {
+            if (removedElement.equals(data[i])) {
                 remove(i);
                 return true;
             }
