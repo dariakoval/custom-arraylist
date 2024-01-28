@@ -184,15 +184,17 @@ class CustomArrayListTest {
         testStringList.add("One");
         testStringList.add("Two");
         assertThat(testStringList.getSize()).isEqualTo(2);
-        testStringList.remove(0);
+        var removedString = testStringList.remove(0);
         assertThat(testStringList.toString()).doesNotContain("One");
+        assertThat(removedString).isEqualTo("One");
         assertThat(testStringList.getSize()).isEqualTo(1);
 
         testIntegerList.add(1);
         testIntegerList.add(2);
         assertThat(testIntegerList.getSize()).isEqualTo(2);
-        testIntegerList.remove(0);
+        var removedInteger = testIntegerList.remove(0);
         assertThat(testIntegerList.toString()).doesNotContain("1");
+        assertThat(removedInteger).isEqualTo(1);
         assertThat(testIntegerList.getSize()).isEqualTo(1);
     }
 

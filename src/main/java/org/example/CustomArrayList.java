@@ -37,9 +37,8 @@ public class CustomArrayList<T> {
      *
      * @return an array containing the elements of the list
      */
-    @SuppressWarnings("unchecked")
-    public T[] toArray() {
-        return (T[]) Arrays.copyOf(data, size);
+    public Object[] toArray() {
+        return Arrays.copyOf(data, size);
     }
 
     /**
