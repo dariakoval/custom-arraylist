@@ -10,7 +10,7 @@ Each CustomArrayList instance has the following operations:
 * *T* **remove** *(int index)* - remove the element at the specified position in this list
 * *void* **clear** *()* - remove all of the elements from this list
 * *int* **getSize** *()* - return the number of elements in this list
-* *T[]* **toArray** *()* - return an array containing all the elements in this list in proper sequence (from first to last element)
+* *Object[]* **toArray** *()* - return an array containing all the elements in this list in proper sequence (from first to last element)
 * *String* **toString** *()* - return a string representation of this list
 
 The CustomArrayListUtil class implements sorting of a CustomArrayList instance.
