@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CustomArrayListTest {
@@ -27,7 +28,7 @@ class CustomArrayListTest {
 
     @Test
     void testGetSize() {
-        assertThat(testStringList.getSize()).isEqualTo(0);
+        assertThat(testStringList.getSize()).isEqualTo(0); // ты перемешиваешь настройку контекста для теста и проверки. прочитай про given_when_then. Это сильно улучшит читаемость тестов
         testStringList.add("One");
         assertThat(testStringList.getSize()).isEqualTo(1);
 
@@ -57,7 +58,7 @@ class CustomArrayListTest {
     }
 
     @Test
-    void testAdd() {
+    void testAdd() { // нэйминги не очень информативны, повтори конвенции по наименованию тестов
         assertThat(testStringList.add("One")).isTrue();
         assertThat(testStringList.add("Two")).isTrue();
         assertThat(testStringList.add("Three")).isTrue();
@@ -80,7 +81,7 @@ class CustomArrayListTest {
         testIntegerList.add(8);
         testIntegerList.add(9);
         assertThat(testIntegerList.getSize()).isEqualTo(10);
-        assertThat(testIntegerList.toString()).isEqualTo("[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]");
+        assertThat(testIntegerList.toString()).isEqualTo("[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]"); // по строкам проверять не очень, лучше переопределить equals hashcode и по ним уже сравнивать через assertEquals
     }
 
     @Test
@@ -236,21 +237,27 @@ class CustomArrayListTest {
         assertThat(testIntegerList.remove(Integer.valueOf(6))).isFalse();
     }
 
+    // Вот как то так приблизительно
+    // мы это еще будем проходить, но тесты должны быть изолированы и они должны строго одну функциональность тестировать
     @Test
-    void testClear() {
+    void clear_whenListFull_thenClearsList() {
+        // инициализируем контекст
         testStringList.add("One");
         testStringList.add("Two");
         testStringList.add("Three");
-        assertThat(testStringList.getSize()).isEqualTo(3);
-        testStringList.clear();
-        assertThat(testStringList.getSize()).isEqualTo(0);
 
-        testIntegerList.add(1);
-        testIntegerList.add(2);
-        testIntegerList.add(3);
-        assertThat(testIntegerList.getSize()).isEqualTo(3);
-        testIntegerList.clear();
-        assertThat(testIntegerList.getSize()).isEqualTo(0);
+        // выполняем тестовую операцию
+        testStringList.clear();
+
+        // проверяем результат
+        assertEquals(0, testStringList.getSize());
+    }
+
+    @Test
+    void clear_whenListIsEmpty_thenRemainsEmpty() {
+        testStringList.clear();
+
+        assertEquals(0, testStringList.getSize());
     }
 }
 
