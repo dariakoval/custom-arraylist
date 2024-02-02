@@ -1,6 +1,9 @@
 package org.example;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Array-based resizable list.
@@ -9,6 +12,10 @@ import java.util.Arrays;
  * @author Daria Koval
  *
  */
+// Очень хороший ридми! Молодец!
+// А почему интерфейса нет? Но это мелочи)
+// В целом все хорошо, только тесты чуть подтянуть)
+
 public class CustomArrayList<T> {
     private static final int DEFAULT_CAPACITY = 10;
     private static final double STANDARD_LOAD_FACTOR = 0.75;
@@ -51,17 +58,19 @@ public class CustomArrayList<T> {
      */
     @Override
     public String toString() {
-        return Arrays.toString((Arrays.copyOf(data, size)));
+        return Arrays.stream(data)
+                .map(Objects::toString)
+                .collect(Collectors.joining(", ")); // как вариант можно так, но это просто придирки по стилю
     }
 
     /**
      * Appends the specified element to the end of this list.
      *
      * @param element - element to be appended to this list
-     * @return true if this list changed as a result of the call
+     * @return true if this list changed as a result of the call А false когда нибудь пернется?)
      */
     public boolean add(T element) {
-        increaseCapacityIfNeed();
+        increaseCapacity();
         data[size++] = element;
         return true;
     }
@@ -76,7 +85,7 @@ public class CustomArrayList<T> {
     public boolean addAll(CustomArrayList<T> list) {
         var sourceArray = list.toArray();
         size += sourceArray.length;
-        increaseCapacityIfNeed();
+        increaseCapacity();
         System.arraycopy(sourceArray, 0, data, size - sourceArray.length, list.size);
         return true;
     }
@@ -90,7 +99,7 @@ public class CustomArrayList<T> {
      */
     public void insert(int index, T element) {
         checkBounds(index);
-        increaseCapacityIfNeed();
+        increaseCapacity();
         System.arraycopy(data, index, data, index + 1, size - index);
         data[index] = element;
         size++;
@@ -135,9 +144,11 @@ public class CustomArrayList<T> {
      * @param removedElement - removedElement to be removed from this list, if present
      * @return true if this list contained the specified element
      */
-    public boolean remove(T removedElement) {
+    public boolean remove(@Nonnull T removedElement) {
         for (int i = 0; i < size; i++) {
-            if (removedElement.equals(data[i])) {
+            if (removedElement.equals(data[i])) { // не помню я писал это другим или нет, но тут есть вероятность NPE.
+                // в таких случаях, если API предусматривает передачу в качерстве аргумента null, то надо всегда проверять
+                // на null и можно повесить аннотацию Nullable для наглядности. Либо если апишка не предусматривает передачу null, то вешать Nonnull или NotNull
                 remove(i);
                 return true;
             }
@@ -156,7 +167,7 @@ public class CustomArrayList<T> {
         this.size = 0;
     }
 
-    private void increaseCapacityIfNeed() {
+    private void increaseCapacity() {
         var loadFactor = (double) size / data.length;
 
         if (loadFactor >= STANDARD_LOAD_FACTOR) {
